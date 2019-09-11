@@ -1,0 +1,29 @@
+<%# if user_signed_in? %>
+  <%# if current_user.admin == true  %>
+<div class="center" >
+  <h1 style=" text-align: center;text-transform: uppercase; color: #4CAF50;"> SHOW </h1>
+</div>
+<div class="container">
+  <table class="table table-hover table-striped table-bordered">
+    <thead>
+    <tr>
+      <th>Job Details</th>
+      <th>Values</th>
+    </tr>
+    </thead>
+    <tbody>
+       <tr ><td>Details</td><td><%= @job.details %></td><br/>
+       <tr ><td>Source long</td><td><%= @job.source_long %></td><br/>
+       <tr ><td>Source lat</td><td><%= @job.source_lat %></td><br/>
+       <tr ><td>Destination long</td><td><%= @job.destination_long %></td><br/>
+       <tr ><td>Destination lat</td><td><%= @job.destination_lat %></td><br/>
+       <tr ><td>Status</td><td><%= sanitize @job.status , tags: %w(strong em a b font br p table tbody tr td ol li u img iframe span blockquote pre h1 h2 h3 h4 h5 h6 div strike hr),
+                                         attributes: %w(href face class src style ta rget frameborder width height color)%></td><br/>
+    </tbody>
+  </table>
+  <%= link_to 'Back', jobs_path, class: 'btn btn-info' %>
+</div>
+<%#else %>
+<!--    <p>ali is here</p>-->
+<%#end %>
+<%#end %>

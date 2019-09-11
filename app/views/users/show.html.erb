@@ -1,0 +1,23 @@
+<div class="center" >
+  <h1 style=" text-align: center;text-transform: uppercase; color: #4CAF50;"> SHOW </h1>
+</div>
+<div class="container">
+    <table class="table table-hover table-striped table-border table table-bordered">
+      <thead>
+        <tr>
+          <th>Job Details</th>
+          <th>Values</th>
+        </tr>
+      </thead>
+       <tbody>
+          <tr ><td>ID</td><td><%= @user.id %><br/></td></tr>
+          <tr ><td>NAME </td><td><%= @user.name %><br/></td></tr>
+          <tr ><td>EMAIL</td><td><%= @user.email %><br/></td></tr>
+          <br/>
+       </tbody>
+  </table>
+  <%= link_to 'Back', jobs_path, class: 'btn btn-info' %>
+</div>
+
+
+

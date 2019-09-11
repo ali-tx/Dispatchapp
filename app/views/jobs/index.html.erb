@@ -1,0 +1,86 @@
+<% if current_user.admin == true  %>
+
+  <h1 class="center", style="color: darkcyan", align="center"> Jobs</h1>
+
+<table class="table table-hover table-striped table-border">
+
+  <%= link_to 'New article', new_job_path, class: 'btn  btn-success', style: 'color:white' %><br/>
+  <tr class="success">
+    <th>ID</th>
+    <th>Details</th>
+    <th>Status</th>
+    <th>Users</th>
+    <th>Show</th>
+    <% if current_user.admin == true  %>
+<!--    <th>Edit</th>-->
+    <th>Destroy</th>
+<!--      <th>Assign Job</th>-->
+<!--      <th>Cancel Job</th>-->
+  <% end %>
+    <th colspan="3"></th>
+  </tr>
+  <% @job.each do |job| %>
+    <tr >
+      <td><%= job.id %></td>
+      <td><%= job.details %></td>
+      <td><%= job.status  %></td>
+      <td><%= job.user_id %></td>
+      <td><%= link_to 'Show', job_path(job), class: 'btn btn-primary', style: 'color:White;' %></td>
+      <% if user_signed_in? %>
+        <% if current_user.admin == true  %>
+          <% if job.status == "Complete" || job.status == "Job Created" %>
+          <td><%= link_to 'Destroy', job_path(job),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' }, class: 'btn btn-danger',  style: 'color:White;' %></td>
+         <%end %>
+          <td>
+
+              <% if job.user_id.nil? %>
+                <%= link_to 'Assign Job',job_assignjob_path(job), class: "btn btn-success  " %>
+              <% end %>
+          </td>
+          <td>
+            <% if job.status != "Complete"  && job.user_id.present?  %>
+              <%= link_to 'Cancel Job',job_close_job_path(job),method: :patch, class: "btn btn-warning " %>
+            <% end %>
+          </td>
+
+         <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<%else %>
+
+  <div class="container">
+    <div class="center" >
+      <h1 style=" text-align: center;text-transform: uppercase; color: #4CAF50;"> Assigned Jobs </h1>
+    <table class="table table-hover table-striped table-border table table-bordered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Job ID </th>
+        <th>Accept </th>
+        <th>Reject </th>
+      </tr>
+       </thead>
+        <tbody>
+          <% @request.each do |r| %>
+          <tr >
+            <td><%= r.id %></td>
+            <td><%= r.user_id %></td>
+            <td><%= r.job_id %></td>
+            <%= link_to 'View Job', job_path(r.job_id)  %></span></strong>
+            <td><%= link_to 'Reject', job_reject_job_path(job_id: r.job_id, request_id: r.id),method: :patch, class: "btn btn-danger pull-right" %></td>
+            <td><%= link_to 'Accept', job_accept_job_path(job_id: r.job_id, request_id: r.id) ,method: :patch, class: "btn btn-success pull-right" %></td>
+
+           </tr>
+           <%end %>
+           <br/>
+         </tbody>
+    </table>
+
+  </div>
+  </div>
+<%end %>

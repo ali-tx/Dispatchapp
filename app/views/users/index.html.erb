@@ -1,0 +1,21 @@
+<h1 class="center", style="color: darkcyan", align="center"> Users</h1>
+<div class="container">
+<table class="table table-hover table-striped table-border">
+  <tr class="success">
+    <th>ID</th>
+    <th>NAME</th>
+    <th>EMAIL</th>
+    <th>STATUS</th>
+    <th>Assign Job</th>
+  </tr>
+    <% @user.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email  %></td>
+        <td><%= user.status  %></td>
+        <td><%= link_to 'Assign Job', jobs_path, class: "btn btn-success "%></td>
+      </tr>
+    <% end%>
+</table>
+</div>
