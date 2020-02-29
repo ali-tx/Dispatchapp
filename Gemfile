@@ -25,7 +25,7 @@ gem 'jquery-rails'
 #
 #
 #
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 
 # Use Puma as the a
 
